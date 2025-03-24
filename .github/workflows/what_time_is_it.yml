@@ -1,0 +1,8 @@
+name: Github Action
+run-name: TEST
+on: [push]
+jobs:
+  Explore-Github-Actions:
+    runs-on:  ubuntu-latest
+    steps:
+      - run:  date
