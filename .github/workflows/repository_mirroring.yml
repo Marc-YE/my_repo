@@ -14,4 +14,4 @@ jobs:
           target_repo_url:
             git@github.com:EpitechPGEPromo2029/B-DOP-200-PAR-2-1-bschocolatine-marc.ye.git
           ssh_private_key:
-            ${{ GIT_SSH_PRIVATE_KEY }}
+            ${{ secrets.GIT_SSH_PRIVATE_KEY }}
