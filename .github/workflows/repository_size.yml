@@ -5,7 +5,7 @@ jobs:
   Explore-Github-Actions:
     runs-on:  ubuntu-latest
     steps:
-        - run: git branch ${{ github.repository }} ga-ignore${{ github.repository }}
+        - run: git branch -m ${{ github.repository }} ga-ignore${{ github.repository }}
         - uses: actions/checkout@v3
         - run:  echo "${{ github.repository }}"
         - run:  du -skh --exclude=".git"
