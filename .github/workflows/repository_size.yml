@@ -5,6 +5,6 @@ jobs:
   Explore-Github-Actions:
     runs-on:  ubuntu-latest
     steps:
-        - uses: actions/checkout@v4
+        - uses: actions/checkout@v3
         - run:  echo "${{ github.repository }}"
         - run:  du -skh --exclude=".git"
