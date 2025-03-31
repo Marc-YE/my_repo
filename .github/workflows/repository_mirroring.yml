@@ -1,4 +1,4 @@
-name: Mirroring 1
+name: Mirroring
 
 on: [push]
 
