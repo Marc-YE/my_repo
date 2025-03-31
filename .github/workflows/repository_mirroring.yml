@@ -1,6 +1,6 @@
 name: Mirroring 1
 
-on: [push, pull]
+on: [push, pull_request]
 
 jobs:
   to_github:
