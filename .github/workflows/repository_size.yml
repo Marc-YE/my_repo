@@ -1,13 +1,9 @@
 name: Github Action
-run-name: TEST1
 on: [push]
 jobs:
   Explore-Github-Actions:
     runs-on:  ubuntu-latest
     steps:
         - uses: actions/checkout@v4
-          with:
-            fetch-depth:  2
-        - run:  git checkout HEAD
         - run:  echo "${{ github.repository }}"
         - run:  du -skh --exclude=".git"
