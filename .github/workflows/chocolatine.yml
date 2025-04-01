@@ -12,6 +12,7 @@ on:
 
 if: github.repository != variables.MIRROR_URL
 jobs:
-  runs-on: ubuntu-latest
-  steps:
-    - run: echo "good"
+  to_github:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "good"
