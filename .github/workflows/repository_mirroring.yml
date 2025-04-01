@@ -12,7 +12,7 @@ on:
 
 jobs:
   to_github:
-    if: ${{ git.repository }} != ${{ variables.MIRROR_URL }}
+    if: ${{ github.repository }} != ${{ variables.MIRROR_URL }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
