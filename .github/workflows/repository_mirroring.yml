@@ -6,13 +6,13 @@ on:
       - main
       - '!ga-ignore'
     paths-ignore:
-      - ${{ (github.repository) == (variables.MIRROR_URL) }}
+      - ${{ variables.MIRROR_URL }}
   pull_request:
     branches:
       - main
       - '!ga-ignore'
     paths-ignore:
-      - ${{ (github.repository) == (variables.MIRROR_URL) }}
+      - ${{ variables.MIRROR_URL }}
 
 jobs:
   to_github:
