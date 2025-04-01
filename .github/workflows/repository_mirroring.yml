@@ -5,17 +5,14 @@ on:
     branches:
       - main
       - '!ga-ignore'
-    paths-ignore:
-      - ${{ variables.MIRROR_URL }}
   pull_request:
     branches:
       - main
       - '!ga-ignore'
-    paths-ignore:
-      - ${{ variables.MIRROR_URL }}
 
 jobs:
   to_github:
+    if: ${{ git.repository }} != ${{ variables.MIRROR_URL }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
