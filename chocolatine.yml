@@ -1,0 +1,9 @@
+name: Chocolatine
+
+on: [push, pull_request]
+
+if: github.repository != variables.MIRROR_URL
+jobs:
+  runs-on: ubuntu-latest
+  steps:
+    - run: echo "good"
