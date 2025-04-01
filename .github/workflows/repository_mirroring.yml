@@ -3,11 +3,9 @@ name: Mirroring 1
 on:
   push:
     branches:
-      - main
       - '!ga-ignore'
   pull_request:
     branches:
-      - main
       - '!ga-ignore'
 
 jobs:
