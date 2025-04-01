@@ -5,16 +5,20 @@ on:
     branches:
       - main
       - '!ga-ignore'
+    paths-ignore:
+      - ${{ (github.repository) == (variables.MIRROR_URL) }}
   pull_request:
     branches:
       - main
       - '!ga-ignore'
+    paths-ignore:
+      - ${{ (github.repository) == (variables.MIRROR_URL) }}
 
 jobs:
   to_github:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - uses: pixta-dev/repository-mirroring-action@v1
