@@ -3,13 +3,14 @@ name: Chocolatine
 on:
   push:
     branches:
-      - '!ga-ignore'
+      - 'ga-ignore*'
   pull_request:
     branches:
-      - '!ga-ignore'
+      - 'ga-ignore*'
 
 jobs:
   to_github:
+    if: ${{ github.repository  != 'EpitechPGEPromo2029/B-DOP-200-PAR-2-1-bschocolatine-marc.ye.git' }}
     runs-on: ubuntu-latest
     steps:
       - run: echo "good"
