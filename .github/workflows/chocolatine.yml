@@ -10,7 +10,6 @@ on:
       - main
       - '!ga-ignore'
 
-if: github.repository != variables.MIRROR_URL
 jobs:
   to_github:
     runs-on: ubuntu-latest
