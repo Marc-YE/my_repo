@@ -2,10 +2,10 @@ name: Chocolatine
 
 on:
   push:
-    branches:
+    branches-ignore:
       - 'ga-ignore*'
   pull_request:
-    branches:
+    branches-ignore:
       - 'ga-ignore*'
 
 jobs:
