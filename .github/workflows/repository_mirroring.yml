@@ -12,7 +12,7 @@ on:
 
 jobs:
   to_github:
-    if: ${{ github.repository }} != 'git@github.com:EpitechPGEPromo2029/B-DOP-200-PAR-2-1-bschocolatine-marc.ye.git'
+    if: ${{ github.repository }} != 'EpitechPGEPromo2029/B-DOP-200-PAR-2-1-bschocolatine-marc.ye.git'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
