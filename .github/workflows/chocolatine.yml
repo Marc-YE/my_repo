@@ -27,12 +27,13 @@ jobs:
           else
             exit 1
           fi
+      - run:
           check.sh ${{ github.repository }} ${{ github.repository }}
           if [ -f "coding-style-reports.log" ]
           then
             echo "::error file=col=5"
           else
-            echo "lol"
+            exit 1
           fi
 
   check_program_compilation:
