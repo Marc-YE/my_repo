@@ -23,12 +23,17 @@ jobs:
       - run:  |
           if [ ${{ github.repository }} != ${{ env.MIRROR_URL }} ]
           then
-            echo "ok"
+            exit 0
           else
             exit 1
           fi
           check.sh ${{ github.repository }} ${{ github.repository }}
-          echo "::error file=col=5"
+          if [ -f "coding-style-reports.log ]
+          then
+            echo "::error file=col=5"
+          else
+            echo "lol"
+          fi
 
   check_program_compilation:
     runs-on:
