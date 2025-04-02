@@ -27,7 +27,6 @@ jobs:
           else
             exit 1
           fi
-
           check.sh ${{ github.repository }} ${{ github.repository }}
           echo "::error file=col=5"
 
