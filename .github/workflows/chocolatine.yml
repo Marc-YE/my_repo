@@ -18,7 +18,7 @@ jobs:
         with:
           fetch-depth: 0
       - run: check.sh $(pwd) $(pwd)
-      - run: cat coding-style-reports.log
+      - run: echo "::error file coding-style-reports.log, line=1, endColumn=2, tittle=lol::Missing semicolon"
 
   check_program_compilation:
     runs-on: ubuntu-latest
