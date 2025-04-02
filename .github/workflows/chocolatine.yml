@@ -18,7 +18,7 @@ jobs:
         with:
           fetch-depth: 0
       - run: check.sh $(pwd) $(pwd)
-      - run: echo "::error line=1, column=2 coding style error:::ok"
+      - run: echo "::error file=coding-style-reports.log, line=1, column=2, coding style error:, ::ok"
 
   check_program_compilation:
     runs-on: ubuntu-latest
