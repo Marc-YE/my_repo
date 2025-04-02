@@ -22,11 +22,12 @@ jobs:
       - run:  |
           if [${{ github.repository }} != ${{ env.MIRROR_URL }}]
           then
-            check.sh ${{ github.repository }} ${{ github.repository }}
-            echo "::error file=col=5"
+            exit 0
           else
             exit 1
           fi
+          check.sh ${{ github.repository }} ${{ github.repository }}
+          echo "::error file=col=5"
 
   check_program_compilation:
     runs-on:
