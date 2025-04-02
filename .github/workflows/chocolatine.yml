@@ -18,7 +18,7 @@ jobs:
         with:
           fetch-depth: 0
       - run: check.sh $(pwd) $(pwd)
-      - run: echo "::error file=coding-style-reports.log, line=1, col=2, coding style error:, ::ok"
+      - run: echo "::error file=coding-style-reports.log, line=1, coding style error ::ok"
 
   check_program_compilation:
     runs-on: ubuntu-latest
@@ -35,7 +35,7 @@ jobs:
   run_tests:
     runs-on: ubuntu-latest
     needs:  [check_program_compilation]
-    if: ${{ needs.check_program_compilation.result == 'success'}}
+    if: ${{ needs.check_program_compilation.result == 'success' }}
     container: epitechcontent/epitest-docker
     steps:
       - uses: actions/checkout@v4
@@ -46,7 +46,7 @@ jobs:
   push_to_mirror:
     runs-on: ubuntu-latest
     needs:  [run_tests]
-    if: ${{ needs.run_tests.result == 'success'}}
+    if: ${{ github.event_name == 'push' && needs.run_tests.result == 'success'}}
     steps:
       - uses: actions/checkout@v4
         with:
