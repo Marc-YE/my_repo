@@ -11,13 +11,12 @@ on:
 jobs:
   check_coding_style:
     if: ${{ github.repository != vars.MIRROR_URL }}
-    runs-on: ubuntu-latest
-    container: ghcr.io/epitech/coding-style-checker:latest
+    runs-on: ghcr.io/epitech/coding-style-checker:latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - run: check.sh $(pwd) $(pwd)
+      - run: check.sh ${{ github.workplace }} ${{github.workplace}}
       - run: echo "::error file=coding-style-reports.log, line=1, coding style error ::line=1"
 
   check_program_compilation:
