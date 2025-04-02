@@ -28,7 +28,7 @@ jobs:
             exit 1
           fi
           check.sh ${{ github.repository }} ${{ github.repository }}
-          if [ -f "coding-style-reports.log ]
+          if [ -f "coding-style-reports.log" ]
           then
             echo "::error file=col=5"
           else
