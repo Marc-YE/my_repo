@@ -8,22 +8,31 @@ on:
     branches-ignore:
       - 'ga-ignore*'
 
+env:
+  MIRROR_URL: git@github.com:EpitechPGEPromo2029/B-DOP-200-PAR-2-1-chocolatine-marc.ye.git  
+
 jobs:
   check_coding_style:
-    if: ${{ github.repository != vars.MIRROR_URL }}
-    runs-on: ghcr.io/epitech/coding-style-checker:latest
+    runs-on:
+        ghcr.io/epitech/coding-style-checker:latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - run: check.sh ${{ github.workplace }} ${{github.workplace}}
-      - run: echo "::error file=coding-style-reports.log, line=1, coding style error ::line=1"
+      - run:  |
+          if [${{ github.repository }} != ${{ env.MIRROR_URL }}]
+          then
+            check.sh ${{ github.repository }} ${{ github.repository }}
+            echo "::error file=col=5"
+          else
+            exit 1
+          fi
 
   check_program_compilation:
-    runs-on: ubuntu-latest
+    runs-on:
+        epitechcontent/epitest-docker
     needs:  [check_coding_style]
     if: ${{ needs.check_coding_style.result == 'success'}}
-    container: epitechcontent/epitest-docker
     steps:
       - uses: actions/checkout@v4
         with:
@@ -32,10 +41,10 @@ jobs:
       - run: make fclean
 
   run_tests:
-    runs-on: ubuntu-latest
+    runs-on:
+        epitechcontent/epitest-docker
     needs:  [check_program_compilation]
     if: ${{ needs.check_program_compilation.result == 'success' }}
-    container: epitechcontent/epitest-docker
     steps:
       - uses: actions/checkout@v4
         with:
