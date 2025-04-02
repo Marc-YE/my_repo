@@ -36,8 +36,9 @@ jobs:
           fi
 
   check_program_compilation:
-    runs-on:
-        epitechcontent/epitest-docker
+    runs-on: ubuntu-latest
+    container:
+      image:  epitechcontent/epitest-docker
     needs:  [check_coding_style]
     if: ${{ needs.check_coding_style.result == 'success'}}
     steps:
@@ -48,8 +49,9 @@ jobs:
       - run: make fclean
 
   run_tests:
-    runs-on:
-        epitechcontent/epitest-docker
+    runs-on: ubuntu-latest
+    container:
+      image:  epitechcontent/epitest-docker
     needs:  [check_program_compilation]
     if: ${{ needs.check_program_compilation.result == 'success' }}
     steps:
