@@ -14,15 +14,39 @@ jobs:
     runs-on: ubuntu-latest
     container: ghcr.io/epitech/coding-style-checker:latest
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - run: check.sh $(pwd) $(pwd)
-  lol:
+      - run: cat coding-style-reports.log
+
+  check_program_compilation:
     runs-on: ubuntu-latest
     needs:  [check_coding_style]
     if: ${{ needs.check_coding_style.result == 'success'}}
+    container: epitechcontent/epitest-docker
     steps:
-      - run: cat coding-style-reports.log
-  to_github:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - run: make
+      - run: make fclean
+
+  run_tests:
     runs-on: ubuntu-latest
+    needs:  [check_program_compilation]
+    if: ${{ needs.check_program_compilation.result == 'success'}}
+    container: epitechcontent/epitest-docker
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - run: make run_tests
+  
+  push_to_mirror:
+    runs-on: ubuntu-latest
+    needs:  [check_program_compilation]
+    if: ${{ needs.check_program_compilation.result == 'success'}}
     steps:
       - uses: actions/checkout@v4
         with:
