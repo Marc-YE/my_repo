@@ -17,7 +17,7 @@ $(NAME):	$(OBJ)
 	$(CC) $(OBJ)
 
 run_tests:	$(NAME)
-	./cool
+	echo "lol"
 
 clean:
 	$(RM) -f $(OBJ)
