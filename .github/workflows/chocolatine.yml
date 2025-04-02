@@ -23,7 +23,7 @@ jobs:
       - run:  |
           if [${{ github.repository != env.MIRROR_URL }}]
           then
-            exit 0
+            echo "ok"
           else
             exit 1
           fi
