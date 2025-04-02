@@ -20,14 +20,14 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - run:
+      - run:  |
           if [ ${{ github.repository }} != ${{ env.MIRROR_URL }} ]
           then
             exit 0
           else
             exit 1
           fi
-      - run: |
+      - run:  |
           check.sh ${{ github.repository }} ${{ github.repository }}
           if [ -f coding-style-reports.log ]
           then
