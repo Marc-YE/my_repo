@@ -21,7 +21,7 @@ jobs:
         with:
           fetch-depth: 0
       - run:  |
-          if [${{ github.repository != env.MIRROR_URL }}]
+          if [[${{ github.repository != env.MIRROR_URL }}]]
           then
             echo "ok"
           else
