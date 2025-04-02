@@ -14,7 +14,8 @@ env:
 jobs:
   check_coding_style:
     runs-on:  ubuntu-latest
-    container:  ghcr.io/epitech/coding-style-checker:latest
+    container:
+        image:  ghcr.io/epitech/coding-style-checker:latest
     steps:
       - uses: actions/checkout@v4
         with:
@@ -26,6 +27,7 @@ jobs:
           else
             exit 1
           fi
+          
           check.sh ${{ github.repository }} ${{ github.repository }}
           echo "::error file=col=5"
 

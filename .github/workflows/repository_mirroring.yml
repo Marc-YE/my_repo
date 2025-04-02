@@ -8,9 +8,12 @@ on:
     branches-ignore:
       - 'ga-ignore*'
 
+env:
+  MIRROR_URL: MARC-YE/my_repo
+
 jobs:
   test:
-    if: ${{ github.repository != 'MARC-YE/my_repo' }}
+    if: ${{ github.repository }} != env.MIRROR_URL 
     runs-on: ubuntu-latest
     steps:
       - run: echo "ok"
