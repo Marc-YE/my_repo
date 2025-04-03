@@ -26,9 +26,9 @@ jobs:
         run:  make clean
       - name: check and execute EXECUTABLES
         run:  |
-          read -ar array <<< "${{ env.EXECUTABLES }}"
-          for exe in ${array{@}}; do
-            if [ ! -x exe]
+          read -ar array <<< ${{ env.EXECUTABLES }}
+          for exe in "${array[@]}"; do
+            if [ ! -x $exe]
             then
               exit 1
             fi
