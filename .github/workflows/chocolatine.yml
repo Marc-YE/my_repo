@@ -27,8 +27,8 @@ jobs:
       - name: check and execute EXECUTABLES
         run:  |
           read -a array <<< ${{ env.EXECUTABLES }}
-          while ${array[i]}; do
-            if [ ! -x $array[i] ]; then exit 1; else i++; fi
+          while $array; do
+            if [ ! -x $array ]; then exit 1; fi
           done
   # check_coding_style:
   #   runs-on:  ubuntu-latest
