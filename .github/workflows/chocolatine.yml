@@ -10,7 +10,7 @@ on:
 
 env:
   MIRROR_URL: git@github.com:EpitechPGEPromo2029/B-DOP-200-PAR-2-1-chocolatine-marc.ye.git
-  
+  EXECUTABLES:  a.out
 
 jobs:
   check_coding_style:
@@ -18,15 +18,18 @@ jobs:
     container:
         image:  ghcr.io/epitech/coding-style-checker:latest
     steps:
-      - uses: actions/checkout@v4
-      - run:  |
+      - name: check repository
+        uses: actions/checkout@v4
+      - name: check if in the mirror repository
+        run:  |
           if [ ${{ github.repository }} != ${{ env.MIRROR_URL }} ]
           then
             exit 0
           else
             exit 1
           fi
-      - run:  |
+      - name: run script and error message
+        run:  |
           check.sh $(pwd) $(pwd)
           if [ -f coding-style-reports.log ]
           then
@@ -36,10 +39,11 @@ jobs:
               LINE=$(echo "$line" | cut -d ':' -f2)
               TYPE=$(echo "$line" | cut -d ':' -f3)
               CODE_ERROR=$(echo "$line" | cut -d ':' -f4-)
-              echo "::error file=$FILE_NAME,line=$LINE,title=$TYPE Coding style error::$CODE_ERROR"
+              echo "::error file=$FILE_NAME,line=$LINE,title=$TYPE coding style error::$CODE_ERROR"
             done < coding-style-reports.log
           fi
-      - run:  |
+      - name: check if file exist and not void
+        run:  |
           if [ -s coding-style-reports.log ]
           then
             exit 1
@@ -52,9 +56,21 @@ jobs:
     needs:  [check_coding_style]
     if: ${{ needs.check_coding_style.result == 'success'}}
     steps:
-      - uses: actions/checkout@v4
-      - run: make
-      - run: make fclean
+      - name: check repository
+        uses: actions/checkout@v4
+      - name: execute make
+        run:  make
+      - name: execute make clean
+        run:  make clean
+      - name: check and execute EXECUTABLES
+        run:  |
+          while IFS=',' read -r line; do
+            if [ !command -v line ]
+            then
+              exit 1
+            fi
+          done < ${{ env.EXECUTABLES }}
+
 
   run_tests:
     runs-on: ubuntu-latest
@@ -64,7 +80,7 @@ jobs:
     if: ${{ needs.check_program_compilation.result == 'success' }}
     steps:
       - uses: actions/checkout@v4
-      - run: make run_tests
+      - run: make tests_run
   
   push_to_mirror:
     runs-on: ubuntu-latest
