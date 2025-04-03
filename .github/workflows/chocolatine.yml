@@ -27,10 +27,7 @@ jobs:
       - name: check and execute EXECUTABLES
         run:  |
           while IFS=',' read -r line; do
-            if [ -x $line ]
-            then
-              exit 1
-            fi
+            if [ ! -x $line ]; then exit 1; fi
           done < ${{ env.EXECUTABLES }}
   # check_coding_style:
   #   runs-on:  ubuntu-latest
