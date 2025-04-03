@@ -26,7 +26,7 @@ jobs:
         run:  make clean
       - name: check and execute EXECUTABLES
         run:  |
-          read -d ',' -a array <<< ${{ env.EXECUTABLES }}
+          read -a array <<< ${{ env.EXECUTABLES }}
           while ${array[i]}; do
             if [ ! -x $array[i] ]; then exit 1; else i++; fi
           done
