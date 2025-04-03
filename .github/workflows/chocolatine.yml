@@ -27,7 +27,7 @@ jobs:
       - name: check and execute EXECUTABLES
         run:  |
           while IFS=',' read -r line; do
-            if [ ! -x $line ]
+            if [ -x $line ]
             then
               exit 1
             fi
