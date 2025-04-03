@@ -22,7 +22,8 @@ jobs:
         run:  make clean
       - name: check and execute EXECUTABLES
         run:  |
-          for exe in ${{ vars.EXECUTABLES }}; do
+          IFS=', ' read -ar exec <<< ${{ vars.EXECUTABLES }}
+          for exe in ${exec[@]}; do
             if [ ! -x $exe ]
             then
               exit 1
