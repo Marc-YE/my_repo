@@ -9,7 +9,8 @@ on:
       - 'ga-ignore*'
 
 env:
-  MIRROR_URL: git@github.com:EpitechPGEPromo2029/B-DOP-200-PAR-2-1-chocolatine-marc.ye.git  
+  MIRROR_URL: git@github.com:EpitechPGEPromo2029/B-DOP-200-PAR-2-1-chocolatine-marc.ye.git
+  
 
 jobs:
   check_coding_style:
@@ -52,8 +53,6 @@ jobs:
     if: ${{ needs.check_coding_style.result == 'success'}}
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
       - run: make
       - run: make fclean
 
@@ -65,8 +64,6 @@ jobs:
     if: ${{ needs.check_program_compilation.result == 'success' }}
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
       - run: make run_tests
   
   push_to_mirror:
@@ -75,8 +72,6 @@ jobs:
     if: ${{ github.event_name == 'push' && needs.run_tests.result == 'success'}}
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
       - uses: pixta-dev/repository-mirroring-action@v1
         with:
           target_repo_url:
