@@ -22,7 +22,7 @@ jobs:
         run:  make clean
       - name: check and execute EXECUTABLES
         run:  |
-          IFS="," read -a array <<< ${{ vars.EXECUTABLES }}
+          IFS="," read -ar array <<< ${{ vars.EXECUTABLES }}
           for exe in "${array[@]}"; do
             if [ ! -x $exe]
             then
