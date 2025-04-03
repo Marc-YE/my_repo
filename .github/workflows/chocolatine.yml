@@ -27,6 +27,8 @@ jobs:
             if [ ! -x $exe ]
             then
               exit 1
+            else
+              echo "$exe"
             fi
           done
 
