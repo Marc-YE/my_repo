@@ -26,9 +26,10 @@ jobs:
         run:  make clean
       - name: check and execute EXECUTABLES
         run:  |
-          while IFS=',' read -r line; do
-            if [ ! -x $line ]; then exit 1; fi
-          done < ${{ env.EXECUTABLES }}
+          read -d ',' -a array <<< ${{ env.EXECUTABLES }}
+          while ${array[i]}; do
+            if [ ! -x $array[i] ]; then exit 1; else i++; fi
+          done
   # check_coding_style:
   #   runs-on:  ubuntu-latest
   #   container:
