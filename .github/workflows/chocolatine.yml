@@ -31,10 +31,11 @@ jobs:
           then
             while IFS= read -r line; do
               FILE=$(echo "$line" | cut -d ':' -f1)
+              FILE_NAME=$(basename "$FILE")
               LINE=$(echo "$line" | cut -d ':' -f2)
               SEVERITY=$(echo "$line" | cut -d ':' -f3)
               ERROR_MESSAGE=$(echo "$line" | cut -d ':' -f4-)
-              echo "::error file=$FILE,line=$LINE, tittle=($SEVERITY) Coding style error:$FILE $LINE::$ERROR_MESSAGE"
+              echo "::error file=$FILE,line=$LINE,tittle=($SEVERITY) Coding style error: $FILE_NAME#$LINE::$ERROR_MESSAGE"
             done < coding-style-reports.log
           fi
       - run:  |
