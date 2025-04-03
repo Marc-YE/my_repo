@@ -35,7 +35,7 @@ jobs:
               LINE=$(echo "$line" | cut -d ':' -f2)
               SEVERITY=$(echo "$line" | cut -d ':' -f3)
               CODE_ERROR=$(echo "$line" | cut -d ':' -f4-)
-              echo "::error file=$FILE,line=$LINE,title=$SEVERITY Coding style error::$CODE_ERROR"
+              echo "::error file=$FILE_NAME,line=$LINE,title=$SEVERITY Coding style error::$CODE_ERROR"
             done < coding-style-reports.log
           fi
       - run:  |
