@@ -23,12 +23,11 @@ jobs:
       - name: check and execute EXECUTABLES
         run:  |
           IFS=',' read -r exec << ${{ vars.EXECUTABLES }}
+          echo "$exec"
           for exe in ${exec[@]}; do
             if [ ! -x $exe ]
             then
               exit 1
-            else
-              echo "$exe"
             fi
           done
 
