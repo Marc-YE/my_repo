@@ -33,9 +33,9 @@ jobs:
               FILE=$(echo "$line" | cut -d ':' -f1)
               FILE_NAME=$(echo "$FILE" | cut -d '/' -f2-)
               LINE=$(echo "$line" | cut -d ':' -f2)
-              SEVERITY=$(echo "$line" | cut -d ':' -f3)
+              TYPE=$(echo "$line" | cut -d ':' -f3)
               CODE_ERROR=$(echo "$line" | cut -d ':' -f4-)
-              echo "::error file=$FILE_NAME,line=$LINE,title=$SEVERITY Coding style error::$CODE_ERROR"
+              echo "::error file=$FILE_NAME,line=$LINE,title=$TYPE Coding style error::$CODE_ERROR"
             done < coding-style-reports.log
           fi
       - run:  |
