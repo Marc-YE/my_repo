@@ -35,8 +35,7 @@ jobs:
               SEVERITY=$(echo "$line" | cut -d ':' -f3)
               ERROR_MESSAGE=$(echo "$line" | cut -d ':' -f4- | awk '{print $1}')
               ERROR_DESCRIPTION=$(echo "$line" | cut -d ':' -f4-)
-              echo "::error file=$FILE,line=$LINE::[$SEVERITY] Coding style error: $FILE:$LINE"
-              echo "::error file=$FILE,line=$LINE::$ERROR_MESSAGE"
+              echo "::error file=$FILE,line=$LINE, $SEVERITY Coding style error: $FILE:$LINE::$ERROR_MESSAGE"
             done < coding-style-reports.log
           fi
       - run:  |
