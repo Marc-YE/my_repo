@@ -16,7 +16,7 @@ all:	$(NAME)
 $(NAME):	$(OBJ)
 	$(CC) $(OBJ)
 
-run_tests:	$(NAME)
+tests_run:	$(NAME)
 	echo "lol"
 
 clean:
