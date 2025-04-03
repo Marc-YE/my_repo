@@ -30,10 +30,13 @@ jobs:
           if [ -f coding-style-reports.log ]
           then
             while IFS= read -r line; do
-              FILE=$(echo "$line" | cut -d ':' -f1)
+              FILE=$(echo "$line" | cut -d ':' -f1 | sed 's|^./')
               LINE=$(echo "$line" | cut -d ':' -f2)
-              ERROR=$(echo "$line" | cut -d ':' -f3-)
-              echo "::error file=$FILE,line=$LINE::$ERROR"
+              SEVERITY=$(echo "$line" | cut -d ':' -f3)
+              ERROR_MESSAGE=$(echo "$line" | cut -d ':' -f4- | awk '{print $1}')
+              ERROR_DESCRIPTION=$(echo "$line" | cut -d ':' -f4-)
+              echo "::error file=$FILE,line=$LINE::[$SEVERITY] Coding style error: $FILE:$LINE"
+              echo "::error file=$FILE,line=$LINE::$ERROR_MESSAGE"
             done < coding-style-reports.log
           fi
       - run:  |
