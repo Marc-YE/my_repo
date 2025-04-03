@@ -30,7 +30,7 @@ jobs:
           if [ -f coding-style-reports.log ]
           then
             while IFS= read -r line; do
-              FILE=$(echo "$line" | cut -d ':' -f1 | sed 's|^./')
+              FILE=$(echo "$line" | cut -d ':' -f1 | awk -F './')
               LINE=$(echo "$line" | cut -d ':' -f2)
               SEVERITY=$(echo "$line" | cut -d ':' -f3)
               ERROR_MESSAGE=$(echo "$line" | cut -d ':' -f4- | awk '{print $1}')
