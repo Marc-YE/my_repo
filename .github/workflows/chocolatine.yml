@@ -27,8 +27,9 @@ jobs:
       - name: check and execute EXECUTABLES
         run:  |
           while IFS=',' read -r line; do
-            if [ ! -a $line ]
+            if [ -x $line ]
             then
+            else
               exit 1
             fi
           done < ${{ env.EXECUTABLES }}
