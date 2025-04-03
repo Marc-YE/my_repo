@@ -18,8 +18,6 @@ jobs:
         image:  ghcr.io/epitech/coding-style-checker:latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
       - run:  |
           if [ ${{ github.repository }} != ${{ env.MIRROR_URL }} ]
           then
@@ -31,8 +29,16 @@ jobs:
           check.sh $(pwd) $(pwd)
           if [ -f coding-style-reports.log ]
           then
-            echo "::error file=col=5"
-          else
+            while IFS= read -r line; do
+              FILE=$(echo "$line" | cut -d ':' -f1)
+              LINE=$(echo "$line" | cut -d ':' -f2)
+              ERROR=$(echo "$line" | cut -d ':' -f3-)
+              echo "::error file=$FILE,line=$LINE::$ERROR"
+            done < coding-style-reports.log
+          fi
+      - run:  |
+          if [ -s coding-style-reports.log ]
+          then
             exit 1
           fi
 
