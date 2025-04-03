@@ -23,7 +23,7 @@ jobs:
       - name: check and execute EXECUTABLES
         run:  |
           for exe in ${{ vars.EXECUTABLES }}; do
-            if [ ! -x $exe]
+            if [[ ! -x $exe ]]
             then
               exit 1
             fi
