@@ -61,7 +61,7 @@ jobs:
       - name: check and execute EXECUTABLES
         run:  |
           IFS=','
-          for exe in ${{ vars.EXECUTABLES }}; do
+          for exe in $(echo "${{ vars.EXECUTABLES }}" | tr ',' '\n'); do
             if [ ! -x $exe ]
             then
               exit 1
