@@ -65,11 +65,13 @@ jobs:
         run:  make clean
       - name: check and execute EXECUTABLES
         run:  |
-          for exe in ${{ env.EXECUTABLES }} ; do
-            if [ ! -x "$exe" ]
-            then
-              exit 1
-            fi
+          while IFS=',' read -a line < ${{ env.EXECUTABLES }} ; do
+            for exe in $line ; do
+              if [ ! -x "$exe" ]
+              then
+                exit 1
+              fi
+            done
           done
 
   run_tests:
