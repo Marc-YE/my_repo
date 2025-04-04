@@ -8,6 +8,9 @@ on:
     branches-ignore:
       - 'ga-ignore-*'
 
+env:
+  EXECUTABLES:  ${{ vars.EXECUTABLES }}
+
 jobs:
   check_coding_style:
     runs-on:  ubuntu-latest
@@ -61,8 +64,8 @@ jobs:
       - name: check and execute EXECUTABLES
         run:  |
           IFS=','
-          for exe in $(echo ${{ vars.EXECUTABLES }} | tr ',' '\n'); do
-            $(echo "${ exe }")
+          for exe in ${ EXECUTABLES//,/ }; do
+            echo "$exe"
             if [ ! -x $exe ]
             then
               exit 1
