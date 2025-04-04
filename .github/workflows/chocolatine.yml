@@ -9,8 +9,10 @@ on:
       - 'ga-ignore-*'
 
 env:
+  MIRROR_URL: ${{ vars.MIRROR_URL}}
+  MIRRORR_NAME: ${{ vars.MIRROR_NAME }}
   EXECUTABLES:  ${{ vars.EXECUTABLES }}
-
+ 
 jobs:
   check_coding_style:
     runs-on:  ubuntu-latest
@@ -21,7 +23,7 @@ jobs:
         uses: actions/checkout@v4
       - name: check if in the mirror repository
         run:  |
-          if [ ${{ github.repository }} != ${{ vars.MIRROR_NAME }} ]
+          if [ ${{ github.repository }} != $env.MIRROR_NAME ]
           then
             exit 0
           else
@@ -64,8 +66,7 @@ jobs:
       - name: check and execute EXECUTABLES
         run:  |
           IFS=','
-          for exe in ${ EXECUTABLES//,/ }; do
-            echo "$exe"
+          for exe in $env.EXECUTABLES ; do
             if [ ! -x $exe ]
             then
               exit 1
@@ -95,7 +96,7 @@ jobs:
         uses: pixta-dev/repository-mirroring-action@v1
         with:
           target_repo_url:
-            ${{ vars.MIRROR_URL }}
+            $env.MIRROR_URL
           ssh_private_key: 
-            ${{ secrets.GIT_SSH_PRIVATE_KEY }} 
+            ${{ secrets.GIT_SSH_PRIVATE_KEY }}
       
