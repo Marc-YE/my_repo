@@ -1,9 +1,0 @@
-name: Github Action
-on: [push]
-jobs:
-  Explore-Github-Actions:
-    runs-on:  ubuntu-latest
-    steps:
-        - uses: actions/checkout@v4
-        - run:  echo "${{ github.ref }}"
-        - run:  du -skh --exclude=".git"
