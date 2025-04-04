@@ -5,7 +5,8 @@
 ## Makefile
 ##
 
-SRC	=	main.c
+SRC	=	main.c	\
+		test.c
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -14,7 +15,8 @@ NAME	=	cool
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
-	$(CC) $(OBJ)
+	gcc main.c
+	gcc -o lol test.c
 
 tests_run:	$(NAME)
 	echo "lol"
