@@ -10,7 +10,7 @@ on:
 
 env:
   MIRROR_URL: ${{ vars.MIRROR_URL}}
-  MIRRORR_NAME: ${{ vars.MIRROR_NAME }}
+  MIRROR_NAME: ${{ vars.MIRROR_NAME }}
   EXECUTABLES:  ${{ vars.EXECUTABLES }}
 
 jobs:
