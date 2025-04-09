@@ -15,7 +15,7 @@ NAME	=	cool
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
-	gcc main.c
+	gcc test
 	gcc -o lol test.c
 
 tests_run:	$(NAME)
